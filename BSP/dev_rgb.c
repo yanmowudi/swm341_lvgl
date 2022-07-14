@@ -27,8 +27,8 @@ void rgb_init(void)
     swm_delay_ms(1);
     GPIO_SetBit(GPIOD, PIN1);
     /** 点亮背光 */
-    GPIO_Init(GPIOA, PIN1, 1, 0, 0, 0);
-    GPIO_SetBit(GPIOA, PIN1);
+    GPIO_Init(GPIOD, PIN9, 1, 0, 0, 0);
+    GPIO_SetBit(GPIOD, PIN9);
 
     // PORT_Init(PORTB, PIN1, PORTB_PIN1_LCD_B0, 0);
     // PORT_Init(PORTB, PIN11, PORTB_PIN11_LCD_B1, 0);
