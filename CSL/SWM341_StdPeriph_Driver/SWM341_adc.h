@@ -60,10 +60,8 @@ typedef struct {
 #define ADC_TRIGGER_SW			1	//Èí¼þÆô¶¯
 #define ADC_TRIGGER_TIMER2		2
 #define ADC_TRIGGER_TIMER3		3
-#define ADC_TRIGGER_EXTRIG0		4	
-#define ADC_TRIGGER_EXTRIG1		5	
-#define ADC_TRIGGER_EXTRIG2		6
-#define ADC_TRIGGER_EXTRIG3		7
+#define ADC_TRIGGER_EXTRIG0		4
+#define ADC_TRIGGER_EXTRIG1		5
 #define ADC_TRIGGER_PWM0		0x10
 #define ADC_TRIGGER_PWM1		0x11
 #define ADC_TRIGGER_PWM2		0x12

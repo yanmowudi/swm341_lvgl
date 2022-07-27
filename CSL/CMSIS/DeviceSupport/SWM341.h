@@ -33,7 +33,7 @@ typedef enum IRQn
   BTIMR0_IRQn             = 11,
   HALL0_IRQn              = 12,
   PWM2_IRQn               = 13,
-  PWMHALT_IRQn            = 14,
+  PWMBRK_IRQn             = 14,
   I2C0_IRQn               = 15,
   CAN0_IRQn               = 16,
   SPI1_IRQn               = 17,
@@ -1789,6 +1789,8 @@ typedef struct {
 #define PWMG_START_PWM2_Msk			(0x01 << PWMG_START_PWM2_Pos)
 #define PWMG_START_PWM3_Pos			3
 #define PWMG_START_PWM3_Msk			(0x01 << PWMG_START_PWM3_Pos)
+#define PWMG_START_PWM4_Pos			4
+#define PWMG_START_PWM4_Msk			(0x01 << PWMG_START_PWM4_Pos)
 
 #define PWMG_SWBRK_PWM0A_Pos		0
 #define PWMG_SWBRK_PWM0A_Msk		(0x01 << PWMG_SWBRK_PWM0A_Pos)
@@ -1798,6 +1800,8 @@ typedef struct {
 #define PWMG_SWBRK_PWM2A_Msk		(0x01 << PWMG_SWBRK_PWM2A_Pos)
 #define PWMG_SWBRK_PWM3A_Pos		3
 #define PWMG_SWBRK_PWM3A_Msk		(0x01 << PWMG_SWBRK_PWM3A_Pos)
+#define PWMG_SWBRK_PWM4A_Pos		4
+#define PWMG_SWBRK_PWM4A_Msk		(0x01 << PWMG_SWBRK_PWM4A_Pos)
 #define PWMG_SWBRK_PWM0B_Pos		8
 #define PWMG_SWBRK_PWM0B_Msk		(0x01 << PWMG_SWBRK_PWM0B_Pos)
 #define PWMG_SWBRK_PWM1B_Pos		9
@@ -1806,6 +1810,8 @@ typedef struct {
 #define PWMG_SWBRK_PWM2B_Msk		(0x01 << PWMG_SWBRK_PWM2B_Pos)
 #define PWMG_SWBRK_PWM3B_Pos		11
 #define PWMG_SWBRK_PWM3B_Msk		(0x01 << PWMG_SWBRK_PWM3B_Pos)
+#define PWMG_SWBRK_PWM4B_Pos		12
+#define PWMG_SWBRK_PWM4B_Msk		(0x01 << PWMG_SWBRK_PWM4B_Pos)
 
 #define PWMG_RESET_PWM0_Pos			0
 #define PWMG_RESET_PWM0_Msk			(0x01 << PWMG_RESET_PWM0_Pos)
@@ -1815,6 +1821,8 @@ typedef struct {
 #define PWMG_RESET_PWM2_Msk			(0x01 << PWMG_RESET_PWM2_Pos)
 #define PWMG_RESET_PWM3_Pos			3
 #define PWMG_RESET_PWM3_Msk			(0x01 << PWMG_RESET_PWM3_Pos)
+#define PWMG_RESET_PWM4_Pos			4
+#define PWMG_RESET_PWM4_Msk			(0x01 << PWMG_RESET_PWM4_Pos)
 
 #define PWMG_RELOADEN_PWM0_Pos		0
 #define PWMG_RELOADEN_PWM0_Msk		(0x01 << PWMG_RELOADEN_PWM0_Pos)
@@ -1824,6 +1832,8 @@ typedef struct {
 #define PWMG_RELOADEN_PWM2_Msk		(0x01 << PWMG_RELOADEN_PWM2_Pos)
 #define PWMG_RELOADEN_PWM3_Pos		3
 #define PWMG_RELOADEN_PWM3_Msk		(0x01 << PWMG_RELOADEN_PWM3_Pos)
+#define PWMG_RELOADEN_PWM4_Pos		4
+#define PWMG_RELOADEN_PWM4_Msk		(0x01 << PWMG_RELOADEN_PWM4_Pos)
 
 #define PWMG_RESTART_PWM0_Pos		8
 #define PWMG_RESTART_PWM0_Msk		(0x01 << PWMG_RESTART_PWM0_Pos)
@@ -1833,6 +1843,8 @@ typedef struct {
 #define PWMG_RESTART_PWM2_Msk		(0x01 << PWMG_RESTART_PWM2_Pos)
 #define PWMG_RESTART_PWM3_Pos		11
 #define PWMG_RESTART_PWM3_Msk		(0x01 << PWMG_RESTART_PWM3_Pos)
+#define PWMG_RESTART_PWM4_Pos		12
+#define PWMG_RESTART_PWM4_Msk		(0x01 << PWMG_RESTART_PWM4_Pos)
 
 #define PWMG_PULSE_EDGE0_Pos		0		//PWM_PULSE0 计数边沿，0 上升沿   1 下降沿
 #define PWMG_PULSE_EDGE0_Msk		(0x01 << PWMG_PULSE_EDGE0_Pos)

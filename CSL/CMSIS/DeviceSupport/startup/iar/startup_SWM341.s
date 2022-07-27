@@ -63,7 +63,7 @@ __vector_table
         DCD     BTIMR0_Handler
         DCD     HALL0_Handler
         DCD     PWM2_Handler
-        DCD     PWMHALT_Handler
+        DCD     PWMBRK_Handler
         DCD     I2C0_Handler
         DCD     CAN0_Handler
         DCD     SPI1_Handler
@@ -265,10 +265,10 @@ HALL0_Handler
 PWM2_Handler
         B PWM2_Handler
 
-        PUBWEAK PWMHALT_Handler
+        PUBWEAK PWMBRK_Handler
         SECTION .text:CODE:REORDER:NOROOT(1)
-PWMHALT_Handler
-        B PWMHALT_Handler
+PWMBRK_Handler
+        B PWMBRK_Handler
 
         PUBWEAK I2C0_Handler
         SECTION .text:CODE:REORDER:NOROOT(1)

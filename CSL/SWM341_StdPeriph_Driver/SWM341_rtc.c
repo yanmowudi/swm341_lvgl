@@ -35,7 +35,9 @@ void RTC_Init(RTC_TypeDef * RTCx, RTC_InitStructure * initStruct)
 {		
 	if(initStruct->clksrc == RTC_CLKSRC_XTAL32K)
 	{
-		SYS->XTALCR |= (1 << SYS_XTALCR_32KON_Pos) | (1 << SYS_XTALCR_32KDRV_Pos);
+		PORT_Init(PORTA, PIN7, PORTA_PIN7_XTAL32_IN,  0);
+		PORT_Init(PORTA, PIN6, PORTA_PIN6_XTAL32_OUT, 0);
+		SYS->XTALCR |= (1 << SYS_XTALCR_32KON_Pos) | (7 << SYS_XTALCR_32KDRV_Pos);
 	}
 	else
 	{

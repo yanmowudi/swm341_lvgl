@@ -60,7 +60,7 @@ __isr_vector:
     .long    BTIMR0_Handler
     .long    HALL0_Handler
     .long    PWM2_Handler
-    .long    PWMHALT_Handler
+    .long    PWMBRK_Handler
     .long    I2C0_Handler
     .long    CAN0_Handler
     .long    SPI1_Handler
@@ -210,7 +210,7 @@ Reset_Handler:
     def_default_handler    BTIMR0_Handler
     def_default_handler    HALL0_Handler
     def_default_handler    PWM2_Handler
-    def_default_handler    PWMHALT_Handler
+    def_default_handler    PWMBRK_Handler
     def_default_handler    I2C0_Handler
     def_default_handler    CAN0_Handler
     def_default_handler    SPI1_Handler

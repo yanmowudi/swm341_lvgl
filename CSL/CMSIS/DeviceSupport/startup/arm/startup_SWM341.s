@@ -85,7 +85,7 @@ __Vectors       DCD     __initial_sp               ; Top of Stack
                 DCD     BTIMR0_Handler
                 DCD     HALL0_Handler
                 DCD     PWM2_Handler
-                DCD     PWMHALT_Handler
+                DCD     PWMBRK_Handler
                 DCD     I2C0_Handler
                 DCD     CAN0_Handler
                 DCD     SPI1_Handler
@@ -307,8 +307,8 @@ PWM2_Handler PROC
                 B       .
                 ENDP
 
-PWMHALT_Handler PROC
-                EXPORT  PWMHALT_Handler            [WEAK]
+PWMBRK_Handler PROC
+                EXPORT  PWMBRK_Handler             [WEAK]
                 B       .
                 ENDP
 
