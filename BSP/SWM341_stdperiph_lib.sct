@@ -13,16 +13,13 @@ LR_IROM1 0x00000000 0x00080000  {    ; load region size_region
    .ANY (+RW +ZI)
    *(.SRAM)
   }
-  ER_SDRAM1 0x80000000 0x00200000  {             ; execution address
+  ER_SDRAM1 0x80000000 0x01000000  {             ; execution address
     *(.SDRAM1)
   }
 }
 
 LR_SPIFLASH 0x70000000 0x01000000  {      ; load region size_region
-  ER_SPIFLASH 0x70000000 0x01000000  {             ; execution address
-    *(.SPIFLASH)
-  }
-  ER_SDRAM2 0x80200000 0x00600000  {             ; execution address
+  ER_SDRAM2 0x81000000 0x01000000  {             ; execution address
     *(.SDRAM2)
   }
 }

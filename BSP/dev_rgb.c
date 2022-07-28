@@ -63,27 +63,27 @@ void rgb_init(void)
     PORT_Init(PORTB, PIN5, PORTB_PIN5_LCD_DCLK, 0);
 
     /** 480*272 */
-//    LCD_initStruct.ClkDiv = 12;
-//    LCD_initStruct.Format = LCD_FMT_RGB565;
-//    LCD_initStruct.HnPixel = 480;
-//    LCD_initStruct.VnPixel = 272;
-//    LCD_initStruct.Hfp = 5;
-//    LCD_initStruct.Hbp = 40;
-//    LCD_initStruct.Vfp = 8;
-//    LCD_initStruct.Vbp = 8;
-//    LCD_initStruct.HsyncWidth = 5;
-//    LCD_initStruct.VsyncWidth = 5;
-    /** 800*480 */
-    LCD_initStruct.ClkDiv = 5;
+    LCD_initStruct.ClkDiv = 12;
     LCD_initStruct.Format = LCD_FMT_RGB565;
-    LCD_initStruct.HnPixel = 800;
-    LCD_initStruct.VnPixel = 480;
-    LCD_initStruct.Hfp = 64;
-    LCD_initStruct.Hbp = 46;
-    LCD_initStruct.Vfp = 22;
-    LCD_initStruct.Vbp = 23;
+    LCD_initStruct.HnPixel = 480;
+    LCD_initStruct.VnPixel = 272;
+    LCD_initStruct.Hfp = 5;
+    LCD_initStruct.Hbp = 40;
+    LCD_initStruct.Vfp = 8;
+    LCD_initStruct.Vbp = 8;
     LCD_initStruct.HsyncWidth = 5;
     LCD_initStruct.VsyncWidth = 5;
+    /** 800*480 */
+//    LCD_initStruct.ClkDiv = 5;
+//    LCD_initStruct.Format = LCD_FMT_RGB565;
+//    LCD_initStruct.HnPixel = 800;
+//    LCD_initStruct.VnPixel = 480;
+//    LCD_initStruct.Hfp = 64;
+//    LCD_initStruct.Hbp = 46;
+//    LCD_initStruct.Vfp = 22;
+//    LCD_initStruct.Vbp = 23;
+//    LCD_initStruct.HsyncWidth = 5;
+//    LCD_initStruct.VsyncWidth = 5;
     /** 1024*600 */
     // LCD_initStruct.ClkDiv = 2;
     // LCD_initStruct.Format = LCD_FMT_RGB565;

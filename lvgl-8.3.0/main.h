@@ -26,8 +26,8 @@
 #include "dev_systick.h"
 #include "dev_uart.h"
 
-#define LV_HOR_RES_MAX (800)
-#define LV_VER_RES_MAX (480)
+#define LV_HOR_RES_MAX (480)
+#define LV_VER_RES_MAX (272)
 
 #define TEXT_RED "\x1B[1;31m"
 #define TEXT_GREEN "\x1B[1;32m"

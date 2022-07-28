@@ -23,7 +23,7 @@ int main(void)
 #elif LV_USE_DEMO_MUSIC
     lv_demo_music();
 #endif
-
+    GPIO_Init(GPIOB, PIN0, 1, 0, 0, 0);
     while (1 == 1)
     {
         lv_task_handler();

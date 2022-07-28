@@ -84,29 +84,29 @@ static bool gt9x_write_regs(uint16_t reg, uint8_t *buf, uint32_t len)
     uint32_t i;
     uint8_t ack;
 
-    ack = I2C_Start(I2C1, (GT9x_ADDR << 1) | 0, 1);
+    ack = I2C_Start(I2C0, (GT9x_ADDR << 1) | 0, 1);
     if (ack == 0)
         goto wr_fail;
-    ack = I2C_Write(I2C1, reg >> 8, 1);
+    ack = I2C_Write(I2C0, reg >> 8, 1);
     if (ack == 0)
         goto wr_fail;
-    ack = I2C_Write(I2C1, reg & 0XFF, 1);
+    ack = I2C_Write(I2C0, reg & 0XFF, 1);
     if (ack == 0)
         goto wr_fail;
     for (i = 0; i < len; i++)
     {
-        ack = I2C_Write(I2C1, buf[i], 1);
+        ack = I2C_Write(I2C0, buf[i], 1);
         if (ack == 0)
             goto wr_fail;
     }
 
-    I2C_Stop(I2C1, 1);
+    I2C_Stop(I2C0, 1);
     for (i = 0; i < CyclesPerUs; i++)
         __NOP();
     return true;
 
 wr_fail:
-    I2C_Stop(I2C1, 1);
+    I2C_Stop(I2C0, 1);
     for (i = 0; i < CyclesPerUs; i++)
         __NOP();
     return false;
@@ -126,31 +126,31 @@ static bool gt9x_read_regs(uint16_t reg, uint8_t *buf, uint32_t len)
     uint32_t i;
     uint8_t ack;
 
-    ack = I2C_Start(I2C1, (GT9x_ADDR << 1) | 0, 1);
+    ack = I2C_Start(I2C0, (GT9x_ADDR << 1) | 0, 1);
     if (ack == 0)
         goto rd_fail;
-    ack = I2C_Write(I2C1, reg >> 8, 1);
+    ack = I2C_Write(I2C0, reg >> 8, 1);
     if (ack == 0)
         goto rd_fail;
-    ack = I2C_Write(I2C1, reg & 0XFF, 1);
+    ack = I2C_Write(I2C0, reg & 0XFF, 1);
     if (ack == 0)
         goto rd_fail;
     for (i = 0; i < CyclesPerUs; i++)
         __NOP();
-    ack = I2C_Start(I2C1, (GT9x_ADDR << 1) | 1, 1); // ReStart
+    ack = I2C_Start(I2C0, (GT9x_ADDR << 1) | 1, 1); // ReStart
     if (ack == 0)
         goto rd_fail;
     for (i = 0; i < len - 1; i++)
     {
-        buf[i] = I2C_Read(I2C1, 1, 1);
+        buf[i] = I2C_Read(I2C0, 1, 1);
     }
-    buf[i] = I2C_Read(I2C1, 0, 1);
-    I2C_Stop(I2C1, 1);
+    buf[i] = I2C_Read(I2C0, 0, 1);
+    I2C_Stop(I2C0, 1);
     for (i = 0; i < CyclesPerUs; i++)
         __NOP();
     return true;
 rd_fail:
-    I2C_Stop(I2C1, 1);
+    I2C_Stop(I2C0, 1);
     for (i = 0; i < CyclesPerUs; i++)
         __NOP();
     return false;
@@ -180,7 +180,7 @@ static void gt9x_read_points(void)
 
         gt9x_read_regs(GT9x_TP1, buf, 4); //读取XY坐标值
         tp_dev.x = (((uint16_t)buf[1] << 8) + buf[0]);
-        tp_dev.y = LV_VER_RES_MAX - (((uint16_t)buf[3] << 8) + buf[2]);
+        tp_dev.y = (((uint16_t)buf[3] << 8) + buf[2]);
 
         gt9x_debug("%d %d\n", tp_dev.x, tp_dev.y);
     }
@@ -250,20 +250,20 @@ void tp_init(void)
     uint8_t temp[5] = {0};
     I2C_InitStructure I2C_initStruct;
 
-    PORT_Init(PORTA, PIN7, PORTA_PIN7_I2C1_SCL, 1); // GPIOA.7配置为I2C1 SCL引脚
-    PORTA->OPEND |= (1 << PIN7);
-    PORTA->PULLU |= (1 << PIN7);                    //必须使能上拉，用于模拟开漏
-    PORT_Init(PORTA, PIN6, PORTA_PIN6_I2C1_SDA, 1); // GPIOA.6配置为I2C1 SDA引脚
-    PORTA->OPEND |= (1 << PIN6);
-    PORTA->PULLU |= (1 << PIN6); //必须使能上拉，用于模拟开漏
+    PORT_Init(PORTA, PIN1, PORTA_PIN1_I2C0_SCL, 1); // GPIOA.1配置为I2C0 SCL引脚
+    PORTA->OPEND |= (1 << PIN1);
+    PORTA->PULLU |= (1 << PIN1);                    //必须使能上拉，用于模拟开漏
+    PORT_Init(PORTA, PIN0, PORTA_PIN0_I2C0_SDA, 1); // GPIOA.0配置为I2C0 SDA引脚
+    PORTA->OPEND |= (1 << PIN0);
+    PORTA->PULLU |= (1 << PIN0); //必须使能上拉，用于模拟开漏
 
     I2C_initStruct.Master = 1;
     I2C_initStruct.MstClk = 400000;
     I2C_initStruct.Addr10b = 0;
     I2C_initStruct.TXEmptyIEn = 0;
     I2C_initStruct.RXNotEmptyIEn = 0;
-    I2C_Init(I2C1, &I2C_initStruct);
-    I2C_Open(I2C1);
+    I2C_Init(I2C0, &I2C_initStruct);
+    I2C_Open(I2C0);
 
     GPIO_Init(GPIOD, PIN0, 0, 0, 1, 0); // 输入，开启下拉。复位时INT为低，选择0xBA作为地址
 
