@@ -144,7 +144,7 @@ static void disp_flush(lv_disp_drv_t * disp_drv, const lv_area_t * area, lv_colo
 {
     LCD->L[0].ADDR = (uint32_t)color_p;
     LCD->CR |= (1 << LCD_CR_VBPRELOAD_Pos);
-
+    while(LCD->CR & LCD_CR_VBPRELOAD_Msk) __NOP();
     /*IMPORTANT!!!
      *Inform the graphics library that you are ready with the flushing*/
     lv_disp_flush_ready(disp_drv);

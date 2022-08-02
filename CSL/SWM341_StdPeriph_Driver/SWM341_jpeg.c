@@ -116,11 +116,11 @@ void JPEG_Decode(JPEG_TypeDef * JPEGx, jfif_info_t * jfif_info, jpeg_outset_t * 
 			break;
 		
 		case JPEG_OUT_RGB888:
-			JPEG->IMGSTR = (int)ceil(jfif_info->Width*3/4) << JPEG_IMGSTR_RGBLINE_Pos;
+			JPEG->IMGSTR = (int)ceil(jfif_info->Width*3/4.0) << JPEG_IMGSTR_RGBLINE_Pos;
 			break;
 		
 		case JPEG_OUT_RGB565:
-			JPEG->IMGSTR = (int)ceil(jfif_info->Width / 2) << JPEG_IMGSTR_RGBLINE_Pos;
+			JPEG->IMGSTR = (int)ceil(jfif_info->Width / 2.0) << JPEG_IMGSTR_RGBLINE_Pos;
 			break;
 		}
 	}
@@ -133,25 +133,25 @@ void JPEG_Decode(JPEG_TypeDef * JPEGx, jfif_info_t * jfif_info, jpeg_outset_t * 
 		switch(((jpeg_outset->format & 7) << 4) | hxvx)
 		{
 		case (JPEG_OUT_YUV << 4) | JPEG_FMT_H1V1:
-			JPEG->IMGSTR = ((int)ceil(jfif_info->Width / 4) << JPEG_IMGSTR_YLINE_Pos) |
-						   ((int)ceil(jfif_info->Width / 4) << JPEG_IMGSTR_UVLINE_Pos);
+			JPEG->IMGSTR = ((int)ceil(jfif_info->Width / 4.0) << JPEG_IMGSTR_YLINE_Pos) |
+						   ((int)ceil(jfif_info->Width / 4.0) << JPEG_IMGSTR_UVLINE_Pos);
 			break;
 		
 		case (JPEG_OUT_YUV << 4) | JPEG_FMT_H2V1:
 		case (JPEG_OUT_YUV << 4) | JPEG_FMT_H2V2:
-			JPEG->IMGSTR = ((int)ceil(jfif_info->Width / 4) << JPEG_IMGSTR_YLINE_Pos) |
-						   ((int)ceil(jfif_info->Width / 8) << JPEG_IMGSTR_UVLINE_Pos);
+			JPEG->IMGSTR = ((int)ceil(jfif_info->Width / 4.0) << JPEG_IMGSTR_YLINE_Pos) |
+						   ((int)ceil(jfif_info->Width / 8.0) << JPEG_IMGSTR_UVLINE_Pos);
 			break;
 		
 		case (JPEG_OUT_YUVsp << 4) | JPEG_FMT_H1V1:
-			JPEG->IMGSTR = ((int)ceil(jfif_info->Width / 4) << JPEG_IMGSTR_YLINE_Pos) |
-						   ((int)ceil(jfif_info->Width / 2) << JPEG_IMGSTR_UVLINE_Pos);
+			JPEG->IMGSTR = ((int)ceil(jfif_info->Width / 4.0) << JPEG_IMGSTR_YLINE_Pos) |
+						   ((int)ceil(jfif_info->Width / 2.0) << JPEG_IMGSTR_UVLINE_Pos);
 			break;
 		
 		case (JPEG_OUT_YUVsp << 4) | JPEG_FMT_H2V1:
 		case (JPEG_OUT_YUVsp << 4) | JPEG_FMT_H2V2:
-			JPEG->IMGSTR = ((int)ceil(jfif_info->Width / 4) << JPEG_IMGSTR_YLINE_Pos) |
-						   ((int)ceil(jfif_info->Width / 4) << JPEG_IMGSTR_UVLINE_Pos);
+			JPEG->IMGSTR = ((int)ceil(jfif_info->Width / 4.0) << JPEG_IMGSTR_YLINE_Pos) |
+						   ((int)ceil(jfif_info->Width / 4.0) << JPEG_IMGSTR_UVLINE_Pos);
 			break;
 		}
 	}

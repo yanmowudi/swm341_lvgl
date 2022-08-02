@@ -45,13 +45,11 @@ void PORT_Init(PORT_TypeDef * PORTx, uint32_t n, uint32_t func, uint32_t digit_i
 #define PORTA_PIN6_I2C1_SDA		1
 #define PORTA_PIN6_PWM_BRK0     2
 #define PORTA_PIN6_PWM_CLK0     3
-#define PORTA_PIN6_XTAL32_OUT   15
 
 #define PORTA_PIN7_GPIO         0
 #define PORTA_PIN7_I2C1_SCL   	1
 #define PORTA_PIN7_TIMR3_IN		2
 #define PORTA_PIN7_TIMR3_OUT	3
-#define PORTA_PIN7_XTAL32_IN	15
 
 #define PORTA_PIN8_GPIO         0
 

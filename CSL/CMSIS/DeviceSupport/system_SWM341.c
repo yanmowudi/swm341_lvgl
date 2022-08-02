@@ -357,8 +357,6 @@ void switchToXTAL_32K(void)
 	
 	switchTo20MHz();
 	
-	PORT_Init(PORTA, PIN7, PORTA_PIN7_XTAL32_IN,  0);
-	PORT_Init(PORTA, PIN6, PORTA_PIN6_XTAL32_OUT, 0);
 	SYS->XTALCR |= (1 << SYS_XTALCR_32KON_Pos) | (7 << SYS_XTALCR_32KDRV_Pos) | (1 << SYS_XTALCR_32KDET_Pos);
 	for(i = 0; i < 1000; i++) __NOP();
 	
