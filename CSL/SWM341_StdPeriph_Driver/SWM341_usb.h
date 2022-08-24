@@ -90,7 +90,9 @@ typedef struct {
 #define USB_CDC_CTRL_CLASS			0x02	// for Interface
 #define USB_CDC_DATA_CLASS			0x0A	// for Interface
 #define USB_HID_CLASS               0x03	// for Interface
+#define USB_MTP_CLASS				0x06 	// for Interface
 #define USB_MSC_CLASS				0x08	// for Interface
+
 
 
 /* SubClass */
@@ -106,67 +108,67 @@ typedef struct {
 
 
 typedef struct {
-    uint8_t  bLength;
-    uint8_t  bDescriptorType;
+	uint8_t  bLength;
+	uint8_t  bDescriptorType;
 } USB_DescHeader_t;
 
 typedef struct __attribute__((packed)) {
-    uint8_t   bLength;
-    uint8_t   bDescriptorType;
-    uint16_t  bcdUSB;               // USB Specification Number which device complies to
-    uint8_t   bDeviceClass;         // 0x00: each interface specifies its own class code
-    uint8_t   bDeviceSubClass;
-    uint8_t   bDeviceProtocol;
-    uint8_t   bMaxPacketSize;
-    uint16_t  idVendor;             // Vendor ID (Assigned by USB Org)
-    uint16_t  idProduct;            // Product ID (Assigned by Manufacturer)
-    uint16_t  bcdDevice;            // Device Release Number
-    uint8_t   iManufacturer;        // Index of Manufacturer String Descriptor
-    uint8_t   iProduct;             // Index of Product String Descriptor
-    uint8_t   iSerialNumber;        // Index of Serial Number String Descriptor
-    uint8_t   bNumConfigurations;   // Number of Possible Configurations
+	uint8_t   bLength;
+	uint8_t   bDescriptorType;
+	uint16_t  bcdUSB;               // USB Specification Number which device complies to
+	uint8_t   bDeviceClass;         // 0x00: each interface specifies its own class code
+	uint8_t   bDeviceSubClass;
+	uint8_t   bDeviceProtocol;
+	uint8_t   bMaxPacketSize;
+	uint16_t  idVendor;             // Vendor ID (Assigned by USB Org)
+	uint16_t  idProduct;            // Product ID (Assigned by Manufacturer)
+	uint16_t  bcdDevice;            // Device Release Number
+	uint8_t   iManufacturer;        // Index of Manufacturer String Descriptor
+	uint8_t   iProduct;             // Index of Product String Descriptor
+	uint8_t   iSerialNumber;        // Index of Serial Number String Descriptor
+	uint8_t   bNumConfigurations;   // Number of Possible Configurations
 } USB_DevDesc_t;
 
 typedef struct __attribute__((packed)) {
-    uint8_t   bLength;
-    uint8_t   bDescriptorType;
-    uint16_t  wTotalLength;         // Total Length
-    uint8_t   bNumInterfaces;       // Number of Interfaces
-    uint8_t   bConfigurationValue;  // Value to use as an argument to select this configuration
-    uint8_t   iConfiguration;       // Index of String Descriptor Describing this configuration
-    uint8_t   bmAttributes;         // D7 Bus Powered , D6 Self Powered, D5 Remote Wakeup , D4..0 Reserved (0)
-    uint8_t   bMaxPower;            // Maximum Power Consumption
+	uint8_t   bLength;
+	uint8_t   bDescriptorType;
+	uint16_t  wTotalLength;         // Total Length
+	uint8_t   bNumInterfaces;       // Number of Interfaces
+	uint8_t   bConfigurationValue;  // Value to use as an argument to select this configuration
+	uint8_t   iConfiguration;       // Index of String Descriptor Describing this configuration
+	uint8_t   bmAttributes;         // D7 Bus Powered , D6 Self Powered, D5 Remote Wakeup , D4..0 Reserved (0)
+	uint8_t   bMaxPower;            // Maximum Power Consumption
 } USB_CfgDesc_t;
 
 typedef struct __attribute__((packed)) {
-    uint8_t bLength;
-    uint8_t bDescriptorType;
-    uint8_t bInterfaceNumber;
-    uint8_t bAlternateSetting;      // Value used to select alternative setting
-    uint8_t bNumEndpoints;          // Number of Endpoints used for this interface
-    uint8_t bInterfaceClass;
-    uint8_t bInterfaceSubClass;
-    uint8_t bInterfaceProtocol;
-    uint8_t iInterface;             // Index of String Descriptor Describing this interface
+	uint8_t bLength;
+	uint8_t bDescriptorType;
+	uint8_t bInterfaceNumber;
+	uint8_t bAlternateSetting;      // Value used to select alternative setting
+	uint8_t bNumEndpoints;          // Number of Endpoints used for this interface
+	uint8_t bInterfaceClass;
+	uint8_t bInterfaceSubClass;
+	uint8_t bInterfaceProtocol;
+	uint8_t iInterface;             // Index of String Descriptor Describing this interface
 } USB_IntfDesc_t;
 
 typedef struct __attribute__((packed)) {
-    uint8_t   bLength;
-    uint8_t   bDescriptorType;
-    uint8_t   bEndpointAddress;     // indicates what endpoint this descriptor is describing
-    uint8_t   bmAttributes;         // specifies the transfer type.
-    uint16_t  wMaxPacketSize;       // Maximum Packet Size this endpoint is capable of sending or receiving  
-    uint8_t   bInterval;            // is used to specify the polling interval of certain transfers.
+	uint8_t   bLength;
+	uint8_t   bDescriptorType;
+	uint8_t   bEndpointAddress;     // indicates what endpoint this descriptor is describing
+	uint8_t   bmAttributes;         // specifies the transfer type.
+	uint16_t  wMaxPacketSize;       // Maximum Packet Size this endpoint is capable of sending or receiving  
+	uint8_t   bInterval;            // is used to specify the polling interval of certain transfers.
 } USB_EpDesc_t;
 
 typedef struct __attribute__((packed)) {
-    uint8_t   bLength;
-    uint8_t   bDescriptorType;
-    uint16_t  bcdHID;               // indicates what endpoint this descriptor is describing
-    uint8_t   bCountryCode;
-    uint8_t   bNumDescriptors;
-    uint8_t   bReportDescriptorType;
-    uint16_t  wItemLength;
+	uint8_t   bLength;
+	uint8_t   bDescriptorType;
+	uint16_t  bcdHID;               // indicates what endpoint this descriptor is describing
+	uint8_t   bCountryCode;
+	uint8_t   bNumDescriptors;
+	uint8_t   bReportDescriptorType;
+	uint16_t  wItemLength;
 } USB_HIDDesc_t;
 
 

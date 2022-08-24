@@ -279,7 +279,7 @@ uint32_t USBH_ReadRxBuffer(uint8_t *buff, uint32_t size)
 	if(size > real_size)
 		size = real_size;
 	
-	memcpy(buff, (uint8_t *)USBH->RXBUF, size);
+	USBD_memcpy(buff, (uint8_t *)USBH->RXBUF, size);
 	
 	return size;
 }

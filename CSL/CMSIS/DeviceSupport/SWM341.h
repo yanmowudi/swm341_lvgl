@@ -2558,6 +2558,8 @@ typedef struct {
 #define LCD_CR_CLKALW_Msk			(0x01 << LCD_CR_CLKALW_Pos)
 #define LCD_CR_BURSTEN_Pos			8		//Burst Enable，0 只进行SINGLE读   1 优先Burst读
 #define LCD_CR_BURSTEN_Msk			(0x01 << LCD_CR_BURSTEN_Pos)
+#define LCD_CR_BURSTLEN_Pos			9		//Burst Length，0 Burst INCR4   1 Burst INCR8
+#define LCD_CR_BURSTLEN_Msk			(0x01 << LCD_CR_BURSTLEN_Pos)
 #define LCD_CR_AUTORESTA_Pos		13		//Auto Restart，1 刷新完一帧后自动重启刷新
 #define LCD_CR_AUTORESTA_Msk		(0x01 << LCD_CR_AUTORESTA_Pos)
 #define LCD_CR_IMMRELOAD_Pos		14		//Immediate Reload，立即将层配置寄存器的值加载到层工作寄存器
@@ -2574,8 +2576,6 @@ typedef struct {
 #define LCD_CR_VSYNCINV_Msk			(0x01 << LCD_CR_VSYNCINV_Pos)
 #define LCD_CR_HSYNCINV_Pos			20		//1 HSYNC反相输出
 #define LCD_CR_HSYNCINV_Msk			(0x01 << LCD_CR_HSYNCINV_Pos)
-#define LCD_CR_BURSTLEN_Pos			21		//Burst Length，0 Burst INCR4   1 Burst INCR8   2 Burst INCR16
-#define LCD_CR_BURSTLEN_Msk			(0x03 << LCD_CR_BURSTLEN_Pos)
 
 #define LCD_CRH_HSW_Pos				0		//Hsync Width, 输出HSYNC低电平持续多少个DOTCLK周期，0表示1个周期
 #define LCD_CRH_HSW_Msk				(0xFF << LCD_CRH_HSW_Pos)
@@ -4003,6 +4003,53 @@ typedef struct {
 #include "SWM341_jpeg.h"
 #include "SWM341_dma2d.h"
 #include "SWM341_iofilt.h"
+
+
+#ifdef  SW_LOG_RTT
+#define log_printf(...)	 	SEGGER_RTT_printf(0, __VA_ARGS__)
+#else
+#define log_printf(...)	 	printf(__VA_ARGS__)
+#endif
+
+
+#ifndef SW_LOG_LEVEL
+#define SW_LOG_LEVEL        0
+#endif
+
+#if (SW_LOG_LEVEL > 0)
+#define SW_LOG_ERR(...)    	{						 \
+							log_printf("ERROR: ");   \
+							log_printf(__VA_ARGS__); \
+							log_printf("\n");		 \
+							}
+
+#if (SW_LOG_LEVEL > 1)
+#define SW_LOG_WARN(...) 	{						 \
+							log_printf("WARN : ");   \
+							log_printf(__VA_ARGS__); \
+							log_printf("\n");		 \
+							}
+
+#if (SW_LOG_LEVEL > 2)
+#define SW_LOG_INFO(...)   	{						 \
+							log_printf("INFO : ");   \
+							log_printf(__VA_ARGS__); \
+							log_printf("\n");		 \
+							}
+#else
+#define SW_LOG_INFO(...)
+#endif
+
+#else
+#define SW_LOG_WARN(...)
+#define SW_LOG_INFO(...)
+#endif
+
+#else
+#define SW_LOG_ERR(...)
+#define SW_LOG_WARN(...)
+#define SW_LOG_INFO(...)
+#endif
 
 
 #endif //__SWM341_H__
