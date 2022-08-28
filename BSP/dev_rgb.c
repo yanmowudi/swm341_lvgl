@@ -63,7 +63,7 @@ void rgb_init(void)
     PORT_Init(PORTB, PIN5, PORTB_PIN5_LCD_DCLK, 0);
 
     /** 480*272 */
-    LCD_initStruct.ClkDiv = 12;
+    LCD_initStruct.ClkDiv = 15;
     LCD_initStruct.Format = LCD_FMT_RGB565;
     LCD_initStruct.HnPixel = 480;
     LCD_initStruct.VnPixel = 272;
