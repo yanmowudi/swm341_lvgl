@@ -40,6 +40,7 @@ void USBH_HW_Init(void)
 	SYS->USBCR |= (1 << SYS_USBCR_RST48M_Pos); __DSB();
 	SYS->USBCR |= (1 << SYS_USBCR_RST12M_Pos); __DSB();
 	SYS->USBCR |= (1 << SYS_USBCR_RSTPLL_Pos); __DSB();
+	for(int i = 0; i < CyclesPerUs; i++) __NOP();
 	
 	SYS->USBCR &= ~SYS_USBCR_ROLE_Msk;
 	SYS->USBCR |= (2 << SYS_USBCR_ROLE_Pos);

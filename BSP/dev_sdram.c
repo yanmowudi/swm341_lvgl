@@ -59,7 +59,7 @@ void sdram_init(void)
     PORT_Init(PORTB, PIN6, PORTB_PIN6_SDR_LDQM, 0);
     PORT_Init(PORTM, PIN12, PORTM_PIN12_SDR_UDQM, 0);
 
-    SDRAM_InitStruct.Size = SDRAM_SIZE_32MB;
+    SDRAM_InitStruct.Size = SDRAM_SIZE_8MB;
     SDRAM_InitStruct.ClkDiv = SDRAM_CLKDIV_1;
     SDRAM_InitStruct.CASLatency = SDRAM_CASLATENCY_3;
     SDRAM_InitStruct.TimeTRP  = SDRAM_TRP_2;

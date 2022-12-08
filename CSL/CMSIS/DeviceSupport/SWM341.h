@@ -274,8 +274,6 @@ typedef struct {
 #define SYS_CLKSEL_SDIO_Msk			(0x03 << SYS_CLKSEL_SDIO_Pos)
 #define SYS_CLKSEL_WDT_Pos			12		//看门狗时钟选择  0 HRC   1 XTAL   2 LRC   3 XTAL_32K
 #define SYS_CLKSEL_WDT_Msk			(0x03 << SYS_CLKSEL_WDT_Pos)
-#define SYS_CLKSEL_RTCTRIM_Pos		14		//RTC Trim参考时钟  0 XTAL   1 XTAL/2   2 XTAL/4   3 XTAL/8
-#define SYS_CLKSEL_RTCTRIM_Msk		(0x03 << SYS_CLKSEL_RTCTRIM_Pos)
 #define SYS_CLKSEL_AD0_Pos			16		//ADC0时钟选择  0 HRC   1 XTAL   2 PLL
 #define SYS_CLKSEL_AD0_Msk			(0x03 << SYS_CLKSEL_AD0_Pos)
 #define SYS_CLKSEL_AD0DIV_Pos		18		//ADC0时钟分频  0 1分频   1 1分频   2 4分频   3 8分频
@@ -612,12 +610,12 @@ typedef struct {
 #define SYS_ACMPSR_CMP2IF_Pos		10
 #define SYS_ACMPSR_CMP2IF_Msk		(0x01 << SYS_ACMPSR_CMP2IF_Pos)
 
-#define SYS_ACMPCR2_HALL0_Pos		0		//1 ACMP0输出连接HALL0输入
-#define SYS_ACMPCR2_HALL0_Msk		(0x01 << SYS_ACMPCR2_HALL0_Pos)
-#define SYS_ACMPCR2_HALL1_Pos		1
-#define SYS_ACMPCR2_HALL1_Msk		(0x01 << SYS_ACMPCR2_HALL1_Pos)
-#define SYS_ACMPCR2_HALL2_Pos		2
-#define SYS_ACMPCR2_HALL2_Msk		(0x01 << SYS_ACMPCR2_HALL2_Pos)
+#define SYS_ACMPCR2_BRK0_Pos		0		//1 ACMP0输出连接用作PWM_BRK0
+#define SYS_ACMPCR2_BRK0_Msk		(0x01 << SYS_ACMPCR2_BRK0_Pos)
+#define SYS_ACMPCR2_BRK1_Pos		1		//1 ACMP1输出连接用作PWM_BRK1
+#define SYS_ACMPCR2_BRK1_Msk		(0x01 << SYS_ACMPCR2_BRK1_Pos)
+#define SYS_ACMPCR2_BRK2_Pos		2
+#define SYS_ACMPCR2_BRK2_Msk		(0x01 << SYS_ACMPCR2_BRK2_Pos)
 #define SYS_ACMPCR2_VREF_Pos		3		//ACMP内部基准电压VREF，电压值为 0.6 + 0.04*VREF
 #define SYS_ACMPCR2_VREF_Msk		(0x3F << SYS_ACMPCR2_VREF_Pos)
 
@@ -1366,7 +1364,7 @@ typedef struct {
 #define ADC_GO_SEQ1_Pos				1
 #define ADC_GO_SEQ1_Msk				(0x01 << ADC_GO_SEQ1_Pos)
 #define ADC_GO_SEQ2_Pos				2
-#define ADC_GO_SEQ2_Msk				(0x01 << ADC_GO_SEQ3_Pos)
+#define ADC_GO_SEQ2_Msk				(0x01 << ADC_GO_SEQ2_Pos)
 #define ADC_GO_SEQ3_Pos				3
 #define ADC_GO_SEQ3_Msk				(0x01 << ADC_GO_SEQ3_Pos)
 #define ADC_GO_BUSY_Pos				4
@@ -1493,7 +1491,7 @@ typedef struct {
 #define ADC_CMP_MIN_Pos				16
 #define ADC_CMP_MIN_Msk				(0xFFF<< ADC_CMP_MIN_Pos)
 
-#define ADC_SEQCHN0_SEQ0_Pos		0		//序列0通道选择，8位对应8个通道，bitx置位表示将通道x加入序列0
+#define ADC_SEQCHN0_SEQ0_Pos		0		//序列0通道选择，12位对应12个通道，bitx置位表示将通道x加入序列0
 #define ADC_SEQCHN0_SEQ0_Msk		(0xFFF << ADC_SEQCHN0_SEQ0_Pos)
 #define ADC_SEQCHN0_SEQ1_Pos		16
 #define ADC_SEQCHN0_SEQ1_Msk		(0xFFF << ADC_SEQCHN0_SEQ1_Pos)
@@ -2675,8 +2673,8 @@ typedef struct {
 #define DMA2D_PFCCR_AINV_Msk		(0x01 << DMA2D_PFCCR_AINV_Pos)
 #define DMA2D_PFCCR_RBSWAP_Pos		4		//RB Swap, 0 RGB   1 BGR
 #define DMA2D_PFCCR_RBSWAP_Msk		(0x01 << DMA2D_PFCCR_RBSWAP_Pos)
-#define DAM2D_PFCCR_AMODE_Pos		8		//Alpha Mode, 0 使用像素点自带Alpha值   1 使用PFCCR.ALPHA值   2 使用像素点自带Alpha值与PFCCR.ALPHA值的乘积
-#define DMA2D_PFCCR_AMODE_Msk		(0x03 << DAM2D_PFCCR_AMODE_Pos)
+#define DMA2D_PFCCR_AMODE_Pos		8		//Alpha Mode, 0 使用像素点自带Alpha值   1 使用PFCCR.ALPHA值   2 使用像素点自带Alpha值与PFCCR.ALPHA值的乘积
+#define DMA2D_PFCCR_AMODE_Msk		(0x03 << DMA2D_PFCCR_AMODE_Pos)
 #define DMA2D_PFCCR_ALPHA_Pos		24
 #define DMA2D_PFCCR_ALPHA_Msk		(0xFFu<< DMA2D_PFCCR_ALPHA_Pos)
 

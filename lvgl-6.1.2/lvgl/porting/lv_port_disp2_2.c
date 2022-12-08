@@ -176,16 +176,16 @@ static void disp_flush(lv_disp_drv_t * disp_drv, const lv_area_t * area, lv_colo
     DMA_initStruct.DstAddrInc = 1;
     DMA_initStruct.Handshake = DMA_HS_NO;
     DMA_initStruct.Priority = DMA_PRI_LOW;
-    DMA_initStruct.DoneIE = 1;
+    DMA_initStruct.INTEn = DMA_IT_DONE;
     DMA_CH_Init(DMA_CH0, &DMA_initStruct);
     DMA_CH_Open(DMA_CH0);
 }
 
 void DMA_Handler(void)
 {
-    if(DMA->IF & (1 << 0))
+    if(DMA_CH_INTStat(DMA_CH0, DMA_IT_DONE))
     {
-        DMA->IF = (1 << 0);
+        DMA_CH_INTClr(DMA_CH0, DMA_IT_DONE);
 
         y_flush_act++;
         if (y_flush_act > y2_flush)

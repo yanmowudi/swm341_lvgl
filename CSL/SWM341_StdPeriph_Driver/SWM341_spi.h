@@ -21,7 +21,6 @@ typedef struct {
 #define SPI_FORMAT_SPI			0		//Motorola SPI 格式
 #define SPI_FORMAT_TI_SSI		1		//TI SSI 格式
 #define SPI_FORMAT_I2S			2
-#define SPI_FORMAT_FLASH		3		//SPI Flash 四线读模式
 
 #define SPI_FIRST_EDGE			0		//第一个时钟沿开始采样
 #define SPI_SECOND_EDGE			1		//第二个时钟沿开始采样
