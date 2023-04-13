@@ -11,14 +11,14 @@ typedef struct {
 	uint8_t TimeTRFC;			// Refresh Cycle
 } SDRAM_InitStructure;
 
-								//rowaddr         bankaddr        coladdr
-#define SDRAM_SIZE_2MB		3	//HADDR[20:10]    HADDR[9]        HADDR[8:1]
-#define SDRAM_SIZE_8MB		0	//HADDR[22:11]    HADDR[10:9]     HADDR[8:1]
-#define SDRAM_SIZE_16MB		1	//HADDR[23:12]    HADDR[11:10]    HADDR[9:1]
-#define SDRAM_SIZE_32MB		2	//HADDR[24:12]    HADDR[11:10]    HADDR[9:1]
+								// rowaddr         bankaddr        coladdr
+#define SDRAM_SIZE_2MB		3	// HADDR[20:10]    HADDR[9]        HADDR[8:1]
+#define SDRAM_SIZE_8MB		0	// HADDR[22:11]    HADDR[10:9]     HADDR[8:1]
+#define SDRAM_SIZE_16MB		1	// HADDR[23:12]    HADDR[11:10]    HADDR[9:1]
+#define SDRAM_SIZE_32MB		2	// HADDR[24:12]    HADDR[11:10]    HADDR[9:1]
 
-#define SDRAM_CLKDIV_1		0
-#define SDRAM_CLKDIV_2		1
+#define SDRAM_CLKDIV_1		0	// 支持的 CPU 频率范围：80MHz--125MHz
+#define SDRAM_CLKDIV_2		1	// 支持的 CPU 频率范围：20MHz--160Mhz
 
 #define SDRAM_CASLATENCY_2	0
 #define SDRAM_CASLATENCY_3	1

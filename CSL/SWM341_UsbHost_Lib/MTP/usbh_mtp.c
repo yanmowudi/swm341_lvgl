@@ -1,10 +1,10 @@
 /****************************************************************************************************************************************** 
-* ÎÄ¼şÃû³Æ: usbh_mtp.c
-* ¹¦ÄÜËµÃ÷:	This file is the MTP Layer Handlers for USB Host MTP class.
-* ¼¼ÊõÖ§³Ö:	http://www.synwit.com.cn/e/tool/gbook/?bid=1
-* ×¢ÒâÊÂÏî: 
-* °æ±¾ÈÕÆÚ:	V1.1.0		2020Äê11ÔÂ3ÈÕ
-* Éı¼¶¼ÇÂ¼:  
+* æ–‡ä»¶åç§°: usbh_mtp.c
+* åŠŸèƒ½è¯´æ˜:	This file is the MTP Layer Handlers for USB Host MTP class.
+* æŠ€æœ¯æ”¯æŒ:	http://www.synwit.com.cn/e/tool/gbook/?bid=1
+* æ³¨æ„äº‹é¡¹: 
+* ç‰ˆæœ¬æ—¥æœŸ:	V1.1.0		2020å¹´11æœˆ3æ—¥
+* å‡çº§è®°å½•:  
 *
 *
 *******************************************************************************************************************************************
@@ -43,11 +43,11 @@ USBH_MTP_Info_t USBH_MTP_Info;
 
 
 /****************************************************************************************************************************************** 
-* º¯ÊıÃû³Æ:	USBH_MTP_Init()
-* ¹¦ÄÜËµÃ÷:	
-* Êä    Èë: ÎŞ
-* Êä    ³ö: ÎŞ
-* ×¢ÒâÊÂÏî: ÎŞ
+* å‡½æ•°åç§°:	USBH_MTP_Init()
+* åŠŸèƒ½è¯´æ˜:	
+* è¾“    å…¥: æ— 
+* è¾“    å‡º: æ— 
+* æ³¨æ„äº‹é¡¹: æ— 
 ******************************************************************************************************************************************/
 static USBH_Status USBH_MTP_Init(USBH_Info_t *phost)
 {
@@ -132,11 +132,11 @@ static USBH_Status USBH_MTP_Init(USBH_Info_t *phost)
 
 
 /****************************************************************************************************************************************** 
-* º¯ÊıÃû³Æ:	USBH_MTP_DeInit()
-* ¹¦ÄÜËµÃ÷:	
-* Êä    Èë: ÎŞ
-* Êä    ³ö: ÎŞ
-* ×¢ÒâÊÂÏî: ÎŞ
+* å‡½æ•°åç§°:	USBH_MTP_DeInit()
+* åŠŸèƒ½è¯´æ˜:	
+* è¾“    å…¥: æ— 
+* è¾“    å‡º: æ— 
+* æ³¨æ„äº‹é¡¹: æ— 
 ******************************************************************************************************************************************/
 static void USBH_MTP_DeInit(USBH_Info_t *phost)
 {
@@ -157,11 +157,11 @@ static void USBH_MTP_DeInit(USBH_Info_t *phost)
 
 
 /****************************************************************************************************************************************** 
-* º¯ÊıÃû³Æ:	USBH_MTP_Request()
-* ¹¦ÄÜËµÃ÷:	Used for handling Standard requests for MTP class.
-* Êä    Èë: ÎŞ
-* Êä    ³ö: ÎŞ
-* ×¢ÒâÊÂÏî: ÎŞ
+* å‡½æ•°åç§°:	USBH_MTP_Request()
+* åŠŸèƒ½è¯´æ˜:	Used for handling Standard requests for MTP class.
+* è¾“    å…¥: æ— 
+* è¾“    å‡º: æ— 
+* æ³¨æ„äº‹é¡¹: æ— 
 ******************************************************************************************************************************************/
 static USBH_Status USBH_MTP_Request(USBH_Info_t *phost)
 {
@@ -171,18 +171,19 @@ static USBH_Status USBH_MTP_Request(USBH_Info_t *phost)
 
 void USBH_MTP_XferProcess(USBH_Info_t *phost);
 /****************************************************************************************************************************************** 
-* º¯ÊıÃû³Æ:	USBH_MTP_Process()
-* ¹¦ÄÜËµÃ÷:	Used for managing state machine for MTP data transfers.
-* Êä    Èë: ÎŞ
-* Êä    ³ö: ÎŞ
-* ×¢ÒâÊÂÏî: ÎŞ
+* å‡½æ•°åç§°:	USBH_MTP_Process()
+* åŠŸèƒ½è¯´æ˜:	Used for managing state machine for MTP data transfers.
+* è¾“    å…¥: æ— 
+* è¾“    å‡º: æ— 
+* æ³¨æ„äº‹é¡¹: æ— 
 ******************************************************************************************************************************************/
 static USBH_Status USBH_MTP_Process(USBH_Info_t *phost)
 {
 	USBH_Resp resp;
 	USBH_Status status = USBH_BUSY;
 	
-	if(USBH_MTP_Info.state != USBH_MTP_EVENT_WAIT)
+	if((USBH_MTP_Info.state != USBH_MTP_EVENT_WAIT) &&
+	   (USBH_MTP_Info.state != USBH_MTP_EVENT_CHECK))
 	{
 		if(USBH_MTP_Info.stateReq != USBH_MTP_IDLE)
 		{
@@ -266,6 +267,19 @@ static USBH_Status USBH_MTP_Process(USBH_Info_t *phost)
 		}
 		break;
 	
+	case USBH_MTP_EVENT_CHECK:
+		if(abs((int)USBH->FRAMENR - (int)USBH_MTP_Info.events.timer) >= USBH_MTP_Info.events.poll)
+		{
+			USBH_MTP_Info.events.timer = USBH->FRAMENR;
+			
+			USBH_MTP_Info.state = USBH_MTP_EVENT;
+		}
+		else
+		{
+			USBH_MTP_Info.state = USBH_MTP_TRANSFER;	// Event æŸ¥è¯¢æ˜¯åœ¨æ•°æ®ä¼ è¾“ä¸­é—´æ’å…¥çš„ï¼Œè¿”å›æ•°æ®ä¼ è¾“
+		}
+		break;
+	
 	case USBH_MTP_EVENT:
 		if(USBH_SendInPacket(phost->Device.Address, USBH_MTP_Info.NotifyEp, USBH_MTP_Info.NotifyEpDATAX, USBH_MTP_Info.NotifyEpSize))
 		{
@@ -282,15 +296,16 @@ static USBH_Status USBH_MTP_Process(USBH_Info_t *phost)
 			USBH_ReadRxBuffer((uint8_t *)&USBH_MTP_Info.events.container, USBH_MTP_Info.NotifyEpSize);
 			
 			USBH_MTP_EventsCallback(phost, USBH_MTP_Info.events.container.code, USBH_MTP_Info.events.container.param1);
-			
-			USBH_MTP_Info.state = USBH_MTP_IDLE;
 		}
-		else if(resp == USBR_NAK)
+		
+		if((USBH_MTP_Info.XferState == USBH_MTP_XFER_DATA_OUT) ||
+		   (USBH_MTP_Info.XferState == USBH_MTP_XFER_DATA_IN))
 		{
-			if(USBH->FRAMENR == USBH_MTP_Info.events.timer)
-				USBH_MTP_Info.state = USBH_MTP_EVENT;
-			else
-				USBH_MTP_Info.state = USBH_MTP_IDLE;
+			USBH_MTP_Info.state = USBH_MTP_TRANSFER;	// Event æŸ¥è¯¢æ˜¯åœ¨æ•°æ®ä¼ è¾“ä¸­é—´æ’å…¥çš„ï¼Œè¿”å›æ•°æ®ä¼ è¾“
+		}
+		else
+		{
+			USBH_MTP_Info.state = USBH_MTP_IDLE;
 		}
 		break;
 	
@@ -307,11 +322,11 @@ static USBH_Status USBH_MTP_Process(USBH_Info_t *phost)
 
 
 /****************************************************************************************************************************************** 
-* º¯ÊıÃû³Æ: USBH_MTP_XferProcess()
-* ¹¦ÄÜËµÃ÷: 
-* Êä    Èë: USBH_Info_t *phost
-* Êä    ³ö: ÎŞ
-* ×¢ÒâÊÂÏî: ÎŞ
+* å‡½æ•°åç§°: USBH_MTP_XferProcess()
+* åŠŸèƒ½è¯´æ˜: 
+* è¾“    å…¥: USBH_Info_t *phost
+* è¾“    å‡º: æ— 
+* æ³¨æ„äº‹é¡¹: æ— 
 ******************************************************************************************************************************************/
 void USBH_MTP_XferProcess(USBH_Info_t *phost)
 {
@@ -394,6 +409,8 @@ void USBH_MTP_XferProcess(USBH_Info_t *phost)
 		else if(resp == USBR_NAK)
 		{
 			USBH_MTP_Info.XferState = USBH_MTP_XFER_DATA_OUT;		// Resend same data
+			
+			USBH_MTP_Info.state = USBH_MTP_EVENT_CHECK;		// ä»æœºè¿”å› NAK æ—¶ï¼Œä¸»æœºæŸ¥è¯¢ä¸€ä¸‹æ˜¯å¦éœ€è¦æ‰§è¡Œ Event æŸ¥è¯¢
 		}
 		else if(resp == USBR_STALL)
 		{
@@ -445,6 +462,8 @@ void USBH_MTP_XferProcess(USBH_Info_t *phost)
 		else if(resp == USBR_NAK)
 		{
 			USBH_MTP_Info.XferState = USBH_MTP_XFER_DATA_IN;
+			
+			USBH_MTP_Info.state = USBH_MTP_EVENT_CHECK;		// ä»æœºè¿”å› NAK æ—¶ï¼Œä¸»æœºæŸ¥è¯¢ä¸€ä¸‹æ˜¯å¦éœ€è¦æ‰§è¡Œ Event æŸ¥è¯¢
 		}
 		else if(resp == USBR_STALL)
 		{
@@ -499,11 +518,11 @@ void USBH_MTP_XferProcess(USBH_Info_t *phost)
 
 
 /****************************************************************************************************************************************** 
-* º¯ÊıÃû³Æ: USBH_MTP_GetDeviceInfo()
-* ¹¦ÄÜËµÃ÷: 
-* Êä    Èë: ÎŞ
-* Êä    ³ö: ÎŞ
-* ×¢ÒâÊÂÏî: ÎŞ
+* å‡½æ•°åç§°: USBH_MTP_GetDeviceInfo()
+* åŠŸèƒ½è¯´æ˜: 
+* è¾“    å…¥: æ— 
+* è¾“    å‡º: æ— 
+* æ³¨æ„äº‹é¡¹: æ— 
 ******************************************************************************************************************************************/
 USBH_Status USBH_MTP_GetDeviceInfo(USBH_Info_t *phost, PTP_DeviceInfo_t *dev_info)
 {
@@ -553,11 +572,11 @@ USBH_Status USBH_MTP_GetDeviceInfo(USBH_Info_t *phost, PTP_DeviceInfo_t *dev_inf
 
 
 /****************************************************************************************************************************************** 
-* º¯ÊıÃû³Æ: USBH_MTP_OpenSession()
-* ¹¦ÄÜËµÃ÷: 
-* Êä    Èë: ÎŞ
-* Êä    ³ö: ÎŞ
-* ×¢ÒâÊÂÏî: ÎŞ
+* å‡½æ•°åç§°: USBH_MTP_OpenSession()
+* åŠŸèƒ½è¯´æ˜: 
+* è¾“    å…¥: æ— 
+* è¾“    å‡º: æ— 
+* æ³¨æ„äº‹é¡¹: æ— 
 ******************************************************************************************************************************************/
 USBH_Status USBH_MTP_OpenSession(USBH_Info_t *phost, uint32_t session)
 {
@@ -604,11 +623,11 @@ USBH_Status USBH_MTP_OpenSession(USBH_Info_t *phost, uint32_t session)
 
 
 /****************************************************************************************************************************************** 
-* º¯ÊıÃû³Æ: USBH_MTP_GetStorageIds()
-* ¹¦ÄÜËµÃ÷: 
-* Êä    Èë: ÎŞ
-* Êä    ³ö: ÎŞ
-* ×¢ÒâÊÂÏî: ÎŞ
+* å‡½æ•°åç§°: USBH_MTP_GetStorageIds()
+* åŠŸèƒ½è¯´æ˜: 
+* è¾“    å…¥: æ— 
+* è¾“    å‡º: æ— 
+* æ³¨æ„äº‹é¡¹: æ— 
 ******************************************************************************************************************************************/
 USBH_Status USBH_MTP_GetStorageIds(USBH_Info_t *phost, PTP_StorageIDs_t *storage_ids)
 {
@@ -659,11 +678,11 @@ USBH_Status USBH_MTP_GetStorageIds(USBH_Info_t *phost, PTP_StorageIDs_t *storage
 
 
 /****************************************************************************************************************************************** 
-* º¯ÊıÃû³Æ: USBH_MTP_GetStorageInfo()
-* ¹¦ÄÜËµÃ÷: 
-* Êä    Èë: ÎŞ
-* Êä    ³ö: ÎŞ
-* ×¢ÒâÊÂÏî: ÎŞ
+* å‡½æ•°åç§°: USBH_MTP_GetStorageInfo()
+* åŠŸèƒ½è¯´æ˜: 
+* è¾“    å…¥: æ— 
+* è¾“    å‡º: æ— 
+* æ³¨æ„äº‹é¡¹: æ— 
 ******************************************************************************************************************************************/
 USBH_Status USBH_MTP_GetStorageInfo(USBH_Info_t *phost, uint32_t storage_id, PTP_StorageInfo_t *storage_info)
 {
@@ -715,11 +734,11 @@ USBH_Status USBH_MTP_GetStorageInfo(USBH_Info_t *phost, uint32_t storage_id, PTP
 
 
 /****************************************************************************************************************************************** 
-* º¯ÊıÃû³Æ: USBH_MTP_GetNumObjects()
-* ¹¦ÄÜËµÃ÷: 
-* Êä    Èë: ÎŞ
-* Êä    ³ö: ÎŞ
-* ×¢ÒâÊÂÏî: ÎŞ
+* å‡½æ•°åç§°: USBH_MTP_GetNumObjects()
+* åŠŸèƒ½è¯´æ˜: 
+* è¾“    å…¥: æ— 
+* è¾“    å‡º: æ— 
+* æ³¨æ„äº‹é¡¹: æ— 
 ******************************************************************************************************************************************/
 USBH_Status USBH_MTP_GetNumObjects(USBH_Info_t *phost, uint32_t storage_id, uint32_t format, uint32_t folder, uint32_t *numobs)
 {
@@ -770,11 +789,11 @@ USBH_Status USBH_MTP_GetNumObjects(USBH_Info_t *phost, uint32_t storage_id, uint
 
 
 /****************************************************************************************************************************************** 
-* º¯ÊıÃû³Æ: USBH_MTP_GetObjectHandles()
-* ¹¦ÄÜËµÃ÷: 
-* Êä    Èë: ÎŞ
-* Êä    ³ö: ÎŞ
-* ×¢ÒâÊÂÏî: ÎŞ
+* å‡½æ•°åç§°: USBH_MTP_GetObjectHandles()
+* åŠŸèƒ½è¯´æ˜: 
+* è¾“    å…¥: æ— 
+* è¾“    å‡º: æ— 
+* æ³¨æ„äº‹é¡¹: æ— 
 ******************************************************************************************************************************************/
 USBH_Status USBH_MTP_GetObjectHandles(USBH_Info_t *phost, uint32_t storage_id, uint32_t format, uint32_t folder, PTP_ObjectHandles_t *handles)
 {
@@ -828,11 +847,11 @@ USBH_Status USBH_MTP_GetObjectHandles(USBH_Info_t *phost, uint32_t storage_id, u
 
 
 /****************************************************************************************************************************************** 
-* º¯ÊıÃû³Æ: USBH_MTP_GetObjectInfo()
-* ¹¦ÄÜËµÃ÷: 
-* Êä    Èë: ÎŞ
-* Êä    ³ö: ÎŞ
-* ×¢ÒâÊÂÏî: ÎŞ
+* å‡½æ•°åç§°: USBH_MTP_GetObjectInfo()
+* åŠŸèƒ½è¯´æ˜: 
+* è¾“    å…¥: æ— 
+* è¾“    å‡º: æ— 
+* æ³¨æ„äº‹é¡¹: æ— 
 ******************************************************************************************************************************************/
 USBH_Status USBH_MTP_GetObjectInfo(USBH_Info_t *phost, uint32_t handle, PTP_ObjectInfo_t *object_info)
 {
@@ -884,11 +903,11 @@ USBH_Status USBH_MTP_GetObjectInfo(USBH_Info_t *phost, uint32_t handle, PTP_Obje
 
 
 /****************************************************************************************************************************************** 
-* º¯ÊıÃû³Æ: USBH_MTP_GetObject()
-* ¹¦ÄÜËµÃ÷: 
-* Êä    Èë: ÎŞ
-* Êä    ³ö: ÎŞ
-* ×¢ÒâÊÂÏî: ÎŞ
+* å‡½æ•°åç§°: USBH_MTP_GetObject()
+* åŠŸèƒ½è¯´æ˜: 
+* è¾“    å…¥: æ— 
+* è¾“    å‡º: æ— 
+* æ³¨æ„äº‹é¡¹: æ— 
 ******************************************************************************************************************************************/
 USBH_Status USBH_MTP_GetObject(USBH_Info_t *phost, uint32_t handle, uint8_t *object)
 {
@@ -936,11 +955,11 @@ USBH_Status USBH_MTP_GetObject(USBH_Info_t *phost, uint32_t handle, uint8_t *obj
 
 
 /****************************************************************************************************************************************** 
-* º¯ÊıÃû³Æ: USBH_MTP_GetPartialObject()
-* ¹¦ÄÜËµÃ÷: 
-* Êä    Èë: ÎŞ
-* Êä    ³ö: ÎŞ
-* ×¢ÒâÊÂÏî: ÎŞ
+* å‡½æ•°åç§°: USBH_MTP_GetPartialObject()
+* åŠŸèƒ½è¯´æ˜: 
+* è¾“    å…¥: æ— 
+* è¾“    å‡º: æ— 
+* æ³¨æ„äº‹é¡¹: æ— 
 ******************************************************************************************************************************************/
 USBH_Status USBH_MTP_GetPartialObject(USBH_Info_t *phost, uint32_t handle, uint32_t offset, uint32_t maxbytes, uint8_t *object, uint32_t *len)
 {
@@ -994,11 +1013,11 @@ USBH_Status USBH_MTP_GetPartialObject(USBH_Info_t *phost, uint32_t handle, uint3
 
 
 /****************************************************************************************************************************************** 
-* º¯ÊıÃû³Æ: USBH_MTP_DeleteObject()
-* ¹¦ÄÜËµÃ÷: 
-* Êä    Èë: ÎŞ
-* Êä    ³ö: ÎŞ
-* ×¢ÒâÊÂÏî: ÎŞ
+* å‡½æ•°åç§°: USBH_MTP_DeleteObject()
+* åŠŸèƒ½è¯´æ˜: 
+* è¾“    å…¥: æ— 
+* è¾“    å‡º: æ— 
+* æ³¨æ„äº‹é¡¹: æ— 
 ******************************************************************************************************************************************/
 USBH_Status USBH_MTP_DeleteObject(USBH_Info_t *phost, uint32_t handle, uint32_t format)
 {
@@ -1044,11 +1063,11 @@ USBH_Status USBH_MTP_DeleteObject(USBH_Info_t *phost, uint32_t handle, uint32_t 
 
 
 /****************************************************************************************************************************************** 
-* º¯ÊıÃû³Æ: USBH_MTP_SendObject()
-* ¹¦ÄÜËµÃ÷: 
-* Êä    Èë: ÎŞ
-* Êä    ³ö: ÎŞ
-* ×¢ÒâÊÂÏî: ÎŞ
+* å‡½æ•°åç§°: USBH_MTP_SendObject()
+* åŠŸèƒ½è¯´æ˜: 
+* è¾“    å…¥: æ— 
+* è¾“    å‡º: æ— 
+* æ³¨æ„äº‹é¡¹: æ— 
 ******************************************************************************************************************************************/
 USBH_Status USBH_MTP_SendObject(USBH_Info_t *phost, uint32_t handle, uint8_t *object, uint32_t size)
 {
@@ -1102,11 +1121,11 @@ USBH_Status USBH_MTP_SendObject(USBH_Info_t *phost, uint32_t handle, uint8_t *ob
 
 
 /****************************************************************************************************************************************** 
-* º¯ÊıÃû³Æ: USBH_MTP_GetDevicePropDesc()
-* ¹¦ÄÜËµÃ÷: 
-* Êä    Èë: ÎŞ
-* Êä    ³ö: ÎŞ
-* ×¢ÒâÊÂÏî: ÎŞ
+* å‡½æ•°åç§°: USBH_MTP_GetDevicePropDesc()
+* åŠŸèƒ½è¯´æ˜: 
+* è¾“    å…¥: æ— 
+* è¾“    å‡º: æ— 
+* æ³¨æ„äº‹é¡¹: æ— 
 ******************************************************************************************************************************************/
 USBH_Status USBH_MTP_GetDevicePropDesc(USBH_Info_t *phost, uint16_t propcode, PTP_DevicePropDesc_t *devicepropertydesc)
 {
@@ -1163,11 +1182,11 @@ USBH_Status USBH_MTP_GetDevicePropDesc(USBH_Info_t *phost, uint16_t propcode, PT
 
 
 /****************************************************************************************************************************************** 
-* º¯ÊıÃû³Æ: USBH_MTP_GetObjectPropsSupported()
-* ¹¦ÄÜËµÃ÷: 
-* Êä    Èë: ÎŞ
-* Êä    ³ö: ÎŞ
-* ×¢ÒâÊÂÏî: ÎŞ
+* å‡½æ•°åç§°: USBH_MTP_GetObjectPropsSupported()
+* åŠŸèƒ½è¯´æ˜: 
+* è¾“    å…¥: æ— 
+* è¾“    å‡º: æ— 
+* æ³¨æ„äº‹é¡¹: æ— 
 ******************************************************************************************************************************************/
 USBH_Status USBH_MTP_GetObjectPropsSupported(USBH_Info_t *phost, uint16_t ofc, uint32_t *propnum, uint16_t *props)
 {
@@ -1219,11 +1238,11 @@ USBH_Status USBH_MTP_GetObjectPropsSupported(USBH_Info_t *phost, uint16_t ofc, u
 
 
 /****************************************************************************************************************************************** 
-* º¯ÊıÃû³Æ: USBH_MTP_GetObjectPropDesc()
-* ¹¦ÄÜËµÃ÷: 
-* Êä    Èë: ÎŞ
-* Êä    ³ö: ÎŞ
-* ×¢ÒâÊÂÏî: ÎŞ
+* å‡½æ•°åç§°: USBH_MTP_GetObjectPropDesc()
+* åŠŸèƒ½è¯´æ˜: 
+* è¾“    å…¥: æ— 
+* è¾“    å‡º: æ— 
+* æ³¨æ„äº‹é¡¹: æ— 
 ******************************************************************************************************************************************/
 USBH_Status USBH_MTP_GetObjectPropDesc(USBH_Info_t *phost, uint16_t opc, uint16_t ofc, PTP_ObjectPropDesc_t *opd)
 {
@@ -1276,11 +1295,11 @@ USBH_Status USBH_MTP_GetObjectPropDesc(USBH_Info_t *phost, uint16_t opc, uint16_
 
 
 /****************************************************************************************************************************************** 
-* º¯ÊıÃû³Æ: USBH_MTP_GetObjectPropList()
-* ¹¦ÄÜËµÃ÷: 
-* Êä    Èë: ÎŞ
-* Êä    ³ö: ÎŞ
-* ×¢ÒâÊÂÏî: ÎŞ
+* å‡½æ•°åç§°: USBH_MTP_GetObjectPropList()
+* åŠŸèƒ½è¯´æ˜: 
+* è¾“    å…¥: æ— 
+* è¾“    å‡º: æ— 
+* æ³¨æ„äº‹é¡¹: æ— 
 ******************************************************************************************************************************************/
 USBH_Status USBH_MTP_GetObjectPropList(USBH_Info_t *phost, uint32_t handle, MTP_Properties_t *pprops, uint32_t *nrofprops)
 {
@@ -1336,11 +1355,11 @@ USBH_Status USBH_MTP_GetObjectPropList(USBH_Info_t *phost, uint32_t handle, MTP_
 
 
 /****************************************************************************************************************************************** 
-* º¯ÊıÃû³Æ:	USBH_MTP_EventsCallback()
-* ¹¦ÄÜËµÃ÷:	The function informs that host has received an event
-* Êä    Èë: ÎŞ
-* Êä    ³ö: ÎŞ
-* ×¢ÒâÊÂÏî: ÎŞ
+* å‡½æ•°åç§°:	USBH_MTP_EventsCallback()
+* åŠŸèƒ½è¯´æ˜:	The function informs that host has received an event
+* è¾“    å…¥: æ— 
+* è¾“    å‡º: æ— 
+* æ³¨æ„äº‹é¡¹: æ— 
 ******************************************************************************************************************************************/
 __attribute__((weak)) void USBH_MTP_EventsCallback(USBH_Info_t *phost, uint32_t event, uint32_t param)
 {

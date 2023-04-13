@@ -34,6 +34,4 @@ void sfc_init(void)
     SFC_initStruct.Width_PageProgram = SFC_PPWIDTH_4;
 
     SFC_Init(&SFC_initStruct);
-    if (!SFC_QuadState())
-        SFC_QuadSwitch(1);
 }

@@ -624,10 +624,6 @@ typedef struct {
 
 #define SYS_TEMPCR_EN_Pos			0
 #define SYS_TEMPCR_EN_Msk			(0x01 << SYS_TEMPCR_EN_Pos)
-#define SYS_TEMPCR_TRIM_Pos			4
-#define SYS_TEMPCR_TRIM_Msk			(0x3F << SYS_TEMPCR_TRIM_Pos)
-#define SYS_TEMPCR_AD0CH7_Pos		16		//ADC0 CH7通道测量信号选择，0 外部输入   1 温度传感器输出
-#define SYS_TEMPCR_AD0CH7_Msk		(0x03 << SYS_TEMPCR_AD0CH7_Pos)
 
 
 
@@ -751,6 +747,11 @@ typedef struct {
 	__IO uint32_t PREDIV;					//预分频，8位
 } TIMR_TypeDef;
 
+
+#define TIMR_LOAD_VALUE_Pos			0
+#define TIMR_LOAD_VALUE_Msk			(0xFFFFFF << TIMR_LOAD_VALUE_Pos)
+#define TIMR_LOAD_RELOAD_Pos		24		//reload VALUE to TIMR's internal Counter immediately. only for BTIMRx, not for TIMRx.
+#define TIMR_LOAD_RELOAD_Msk		(0x01 << TIMR_LOAD_RELOAD_Pos)
 
 #define TIMR_CR_CLKSRC_Pos			0		//时钟源：  0 内部系统时钟	2 外部引脚脉冲计数
 #define TIMR_CR_CLKSRC_Msk			(0x03 << TIMR_CR_CLKSRC_Pos)

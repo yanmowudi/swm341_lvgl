@@ -13,6 +13,12 @@ typedef enum {
 	USBH_MTP_TRANSFER,
 	USBH_MTP_EVENT,
 	USBH_MTP_EVENT_WAIT,
+	
+	/* Events may be interleaved within a data stream during a transaction.
+	   It may be assumed that the Operation Request Phase and Response Phase are atomic, but the Data Phase
+	   must allow for events to be communicated in either direction without interrupting data transfer.
+	*/
+	USBH_MTP_EVENT_CHECK,
 } USBH_MTP_State;
 
 typedef enum {
@@ -74,7 +80,7 @@ typedef struct {
 
     uint8_t  *data_ptr;
     uint32_t  data_len;
-    uint8_t   first_packet;		// 1 Êı¾İµÚÒ»Ö¡   3 Êı¾İµÚÒ»Ö¡£¬ÇÒĞè¶ªÆú header ²»´æ´¢
+    uint8_t   first_packet;		// 1 æ•°æ®ç¬¬ä¸€å¸§   3 æ•°æ®ç¬¬ä¸€å¸§ï¼Œä¸”éœ€ä¸¢å¼ƒ header ä¸å­˜å‚¨
 	
 	PTP_DeviceInfo_t  	devinfo;
 	PTP_StorageIDs_t  	storids;

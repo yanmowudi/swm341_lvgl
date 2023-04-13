@@ -49,6 +49,12 @@ void SFC_Init(SFC_InitStructure * initStruct)
 	SFC->TIM &= ~(SFC_TIM_WIP_CHK_ITV_Msk | SFC_TIM_WIP_CHK_LMT_Msk);
 	SFC->TIM |= ((CyclesPerUs / 10) << SFC_TIM_WIP_CHK_ITV_Pos) |	//2048 * (CyclesPerUs / 10) / CyclesPerUs us = 0.2 ms
 				(255 << SFC_TIM_WIP_CHK_LMT_Pos);
+	
+	if((initStruct->Width_Read == SFC_RDWIDTH_4) || (initStruct->Width_PageProgram == SFC_PPWIDTH_4))
+	{
+		if(SFC_QuadState() == 0)
+			SFC_QuadSwitch(1);
+	}
 }
 
 /****************************************************************************************************************************************** 
@@ -66,7 +72,8 @@ uint32_t SFC_ReadJEDEC(void)
 	SFC->CMD = SFC_CMD_READ_JEDEC;
 	
 	SFC->GO = 1;
-	while(SFC->GO);
+	__DSB(); __ISB();
+	while(SFC->GO) __NOP();
 	
 	return SFC->DATA;
 }
@@ -104,9 +111,10 @@ void SFC_EraseEx(uint32_t addr, uint8_t cmd, uint8_t wait)
 				(1 << SFC_CFG_CMDWREN_Pos) |
 				(type << SFC_CFG_CMDTYPE_Pos);
 	SFC->CMD = cmd;
-	SFC->GO = 1;
 	
-	for(int i = 0; i < CyclesPerUs; i++) __NOP();	//µÈ´ýÃüÁî·¢³ö
+	SFC->GO = 1;
+	__DSB(); __ISB();
+	while(SFC->GO) __NOP();
 	
 	SFC->CFG &= ~SFC_CFG_WREN_Msk;
 	
@@ -166,7 +174,8 @@ uint8_t SFC_ReadStatusReg(uint8_t cmd)
 	SFC->CMD = cmd;
 	
 	SFC->GO = 1;
-	while(SFC->GO);
+	__DSB(); __ISB();
+	while(SFC->GO) __NOP();
 	
 	return SFC->DATA;
 }
@@ -191,7 +200,8 @@ void SFC_WriteStatusReg(uint8_t cmd, uint16_t reg)
 	SFC->DATA = reg;
 	
 	SFC->GO = 1;
-	while(SFC->GO);
+	__DSB(); __ISB();
+	while(SFC->GO) __NOP();
 }
 
 
