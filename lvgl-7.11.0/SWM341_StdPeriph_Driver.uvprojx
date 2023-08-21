@@ -16,7 +16,7 @@
         <TargetCommonOption>
           <Device>SWM341xE</Device>
           <Vendor>Synwit</Vendor>
-          <PackID>Synwit.SWM32_DFP.2.0.4</PackID>
+          <PackID>Synwit.SWM32_DFP.2.0.5</PackID>
           <PackURL>http://www.synwit.com/pack</PackURL>
           <Cpu>IRAM(0x20000000,0x10000) IROM(0x00000000,0x80000) CPUTYPE("Cortex-M33") FPU3(SFPU) DSP CLOCK(12000000) ELITTLE</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
@@ -314,7 +314,7 @@
           </ArmAdsMisc>
           <Cads>
             <interw>1</interw>
-            <Optim>5</Optim>
+            <Optim>0</Optim>
             <oTime>0</oTime>
             <SplitLS>0</SplitLS>
             <OneElfS>1</OneElfS>
@@ -333,11 +333,11 @@
             <v6LangP>3</v6LangP>
             <vShortEn>1</vShortEn>
             <vShortWch>1</vShortWch>
-            <v6Lto>0</v6Lto>
+            <v6Lto>1</v6Lto>
             <v6WtE>0</v6WtE>
             <v6Rtti>0</v6Rtti>
             <VariousControls>
-              <MiscControls></MiscControls>
+              <MiscControls>-Omax</MiscControls>
               <Define></Define>
               <Undefine></Undefine>
               <IncludePath>..\CSL\CMSIS\CoreSupport;..\CSL\CMSIS\DeviceSupport;..\CSL\SWM341_StdPeriph_Driver;..\BSP;.</IncludePath>
@@ -1607,7 +1607,7 @@
         <TargetCommonOption>
           <Device>SWM341xE</Device>
           <Vendor>Synwit</Vendor>
-          <PackID>Synwit.SWM32_DFP.2.0.4</PackID>
+          <PackID>Synwit.SWM32_DFP.2.0.5</PackID>
           <PackURL>http://www.synwit.com/pack</PackURL>
           <Cpu>IRAM(0x20000000,0x10000) IROM(0x00000000,0x80000) CPUTYPE("Cortex-M33") FPU3(SFPU) DSP CLOCK(12000000) ELITTLE</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
@@ -1905,7 +1905,7 @@
           </ArmAdsMisc>
           <Cads>
             <interw>1</interw>
-            <Optim>5</Optim>
+            <Optim>0</Optim>
             <oTime>0</oTime>
             <SplitLS>0</SplitLS>
             <OneElfS>1</OneElfS>
@@ -1924,11 +1924,11 @@
             <v6LangP>3</v6LangP>
             <vShortEn>1</vShortEn>
             <vShortWch>1</vShortWch>
-            <v6Lto>0</v6Lto>
+            <v6Lto>1</v6Lto>
             <v6WtE>0</v6WtE>
             <v6Rtti>0</v6Rtti>
             <VariousControls>
-              <MiscControls></MiscControls>
+              <MiscControls>-Omax</MiscControls>
               <Define></Define>
               <Undefine></Undefine>
               <IncludePath>..\CSL\CMSIS\CoreSupport;..\CSL\CMSIS\DeviceSupport;..\CSL\SWM341_StdPeriph_Driver;..\BSP;.</IncludePath>
@@ -3198,7 +3198,7 @@
         <TargetCommonOption>
           <Device>SWM341xE</Device>
           <Vendor>Synwit</Vendor>
-          <PackID>Synwit.SWM32_DFP.2.0.4</PackID>
+          <PackID>Synwit.SWM32_DFP.2.0.5</PackID>
           <PackURL>http://www.synwit.com/pack</PackURL>
           <Cpu>IRAM(0x20000000,0x10000) IROM(0x00000000,0x80000) CPUTYPE("Cortex-M33") FPU3(SFPU) DSP CLOCK(12000000) ELITTLE</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
@@ -3496,7 +3496,7 @@
           </ArmAdsMisc>
           <Cads>
             <interw>1</interw>
-            <Optim>5</Optim>
+            <Optim>0</Optim>
             <oTime>0</oTime>
             <SplitLS>0</SplitLS>
             <OneElfS>1</OneElfS>
@@ -3515,11 +3515,11 @@
             <v6LangP>3</v6LangP>
             <vShortEn>1</vShortEn>
             <vShortWch>1</vShortWch>
-            <v6Lto>0</v6Lto>
+            <v6Lto>1</v6Lto>
             <v6WtE>0</v6WtE>
             <v6Rtti>0</v6Rtti>
             <VariousControls>
-              <MiscControls></MiscControls>
+              <MiscControls>-Omax</MiscControls>
               <Define></Define>
               <Undefine></Undefine>
               <IncludePath>..\CSL\CMSIS\CoreSupport;..\CSL\CMSIS\DeviceSupport;..\CSL\SWM341_StdPeriph_Driver;..\BSP;.</IncludePath>
@@ -4789,7 +4789,7 @@
         <TargetCommonOption>
           <Device>SWM341xE</Device>
           <Vendor>Synwit</Vendor>
-          <PackID>Synwit.SWM32_DFP.2.0.4</PackID>
+          <PackID>Synwit.SWM32_DFP.2.0.5</PackID>
           <PackURL>http://www.synwit.com/pack</PackURL>
           <Cpu>IRAM(0x20000000,0x10000) IROM(0x00000000,0x80000) CPUTYPE("Cortex-M33") FPU3(SFPU) DSP CLOCK(12000000) ELITTLE</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
@@ -5087,7 +5087,7 @@
           </ArmAdsMisc>
           <Cads>
             <interw>1</interw>
-            <Optim>5</Optim>
+            <Optim>0</Optim>
             <oTime>0</oTime>
             <SplitLS>0</SplitLS>
             <OneElfS>1</OneElfS>
@@ -5106,11 +5106,11 @@
             <v6LangP>3</v6LangP>
             <vShortEn>1</vShortEn>
             <vShortWch>1</vShortWch>
-            <v6Lto>0</v6Lto>
+            <v6Lto>1</v6Lto>
             <v6WtE>0</v6WtE>
             <v6Rtti>0</v6Rtti>
             <VariousControls>
-              <MiscControls></MiscControls>
+              <MiscControls>-Omax</MiscControls>
               <Define></Define>
               <Undefine></Undefine>
               <IncludePath>..\CSL\CMSIS\CoreSupport;..\CSL\CMSIS\DeviceSupport;..\CSL\SWM341_StdPeriph_Driver;..\BSP;.</IncludePath>

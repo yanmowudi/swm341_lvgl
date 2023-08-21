@@ -1,4 +1,4 @@
---cpu=Cortex-M33
+--cpu=Cortex-M33 --lto
 ".\out\main.o"
 ".\out\dev_gt9x.o"
 ".\out\dev_rgb.o"

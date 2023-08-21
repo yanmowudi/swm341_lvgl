@@ -1,4 +1,4 @@
---cpu=Cortex-M33
+--cpu=Cortex-M33 --lto
 ".\out\main.o"
 ".\out\dev_gt9x.o"
 ".\out\dev_rgb.o"
@@ -37,7 +37,7 @@
 ".\out\swm341_wdt.o"
 ".\out\system_swm341.o"
 ".\out\startup_swm341.o"
-".\out\lv_port_disp3.o"
+".\out\lv_port_disp2_2.o"
 ".\out\lv_port_indev.o"
 ".\out\lv_port_fs.o"
 ".\out\lv_disp.o"
